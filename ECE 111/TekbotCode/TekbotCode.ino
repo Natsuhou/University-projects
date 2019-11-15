@@ -1,9 +1,3 @@
-/*
- * Name: Tekbot Code
- * Author: Matthew T
- * Group 1: Andrew, Matthew and Lucy
- * Date: 10/28/19
- */
 #define R1_MOTOR 7//MOTOR 1 D2
 #define R2_MOTOR 6 //MOTOR 1 D4
 #define L1_MOTOR 8 //MOTOR 2 D5
@@ -12,7 +6,7 @@
 #define B_LEFT 2 //Left bumper D2
 #define PWM_L 5 //PWM for motor 1
 #define PWM_R 3 //PWM for motor 2
-#define PWM_SPEED 250 //Speed
+#define PWM_SPEED 1606 //Speed
 
 
 //Use enable pins on DNE
