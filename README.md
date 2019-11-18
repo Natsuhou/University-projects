@@ -1,2 +1,2 @@
-# Tekbot Magic
-Documentation and stuff for tekbot>
+# Recipe for Disaster
+Documentation stuff for ECE 111 projects
