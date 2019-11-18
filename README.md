@@ -1,2 +1,2 @@
-# Arduino
-Arduino stuff that I can use in the future
+# Tekbot Magic
+Documentation and stuff for tekbot>
