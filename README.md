@@ -9,3 +9,5 @@ Basic bump bot that does stuff when the bumpers are hit.
 - Arduino nano as microcontroller
 - L239DNE as motor controller
 ![wiring diagram](https://github.com/Shogatsu/ECE-Stuff/blob/master/WiringDiagram/finalwiring.PNG)
+
+### Code
