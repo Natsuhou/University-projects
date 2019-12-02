@@ -176,26 +176,11 @@ X P3_6 9 -700 100 100 R 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
-# SparkFun-PowerSymbols_5V
+# WiringDiagram-rescue_1KOHM-HORIZ-1_4W-1%-SparkFun-Resistors
 #
-DEF SparkFun-PowerSymbols_5V #SUPPLY 0 40 N N 1 L P
-F0 "#SUPPLY" 50 0 45 H I L BNN
-F1 "SparkFun-PowerSymbols_5V" -50 150 45 H V L BNN
-F2 "XXX-00000" 0 300 60 H V C CNN
-F3 "" 0 0 60 H I C CNN
-DRAW
-P 2 1 0 0 0 0 0 100 N
-P 2 1 0 0 0 100 -30 50 N
-P 2 1 0 0 30 50 0 100 N
-X 5V ~ 0 0 0 U 40 40 1 1 W N
-ENDDRAW
-ENDDEF
-#
-# SparkFun-Resistors_1KOHM-HORIZ-1_4W-1%
-#
-DEF SparkFun-Resistors_1KOHM-HORIZ-1_4W-1% R 0 40 N N 1 L N
+DEF WiringDiagram-rescue_1KOHM-HORIZ-1_4W-1%-SparkFun-Resistors R 0 40 N N 1 L N
 F0 "R" -200 50 45 H V L BNN
-F1 "SparkFun-Resistors_1KOHM-HORIZ-1_4W-1%" -200 -150 45 H V L BNN
+F1 "WiringDiagram-rescue_1KOHM-HORIZ-1_4W-1%-SparkFun-Resistors" -200 -150 45 H V L BNN
 F2 "AXIAL-0.3" 0 150 20 H I C CNN
 F3 "" 0 0 60 H I C CNN
 F4 "RES-12182" 0 200 60 H V C CNN
@@ -225,11 +210,11 @@ X 2 P$2 200 0 100 L 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# SparkFun-Resistors_2.0KOHM-0603-1_10W-5%
+# WiringDiagram-rescue_2.0KOHM-0603-1_10W-5%-SparkFun-Resistors
 #
-DEF SparkFun-Resistors_2.0KOHM-0603-1_10W-5% R 0 40 N N 1 L N
+DEF WiringDiagram-rescue_2.0KOHM-0603-1_10W-5%-SparkFun-Resistors R 0 40 N N 1 L N
 F0 "R" -200 50 45 H V L BNN
-F1 "SparkFun-Resistors_2.0KOHM-0603-1_10W-5%" -200 -150 45 H V L BNN
+F1 "WiringDiagram-rescue_2.0KOHM-0603-1_10W-5%-SparkFun-Resistors" -200 -150 45 H V L BNN
 F2 "0603" 0 150 20 H I C CNN
 F3 "" 0 0 60 H I C CNN
 F4 "RES-08296" 0 200 60 H V C CNN
@@ -251,11 +236,26 @@ X 2 2 200 0 100 L 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# SparkFun-Switches_MOMENTARY-SWITCH-SPST-SMD-5.2MM
+# WiringDiagram-rescue_5V-SparkFun-PowerSymbols
 #
-DEF SparkFun-Switches_MOMENTARY-SWITCH-SPST-SMD-5.2MM S 0 40 N N 1 L N
+DEF WiringDiagram-rescue_5V-SparkFun-PowerSymbols #SUPPLY 0 40 N N 1 L P
+F0 "#SUPPLY" 50 0 45 H I L BNN
+F1 "WiringDiagram-rescue_5V-SparkFun-PowerSymbols" -50 150 45 H V L BNN
+F2 "XXX-00000" 0 300 60 H V C CNN
+F3 "" 0 0 60 H I C CNN
+DRAW
+P 2 1 0 0 0 0 0 100 N
+P 2 1 0 0 0 100 -30 50 N
+P 2 1 0 0 30 50 0 100 N
+X 5V ~ 0 0 0 U 40 40 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# WiringDiagram-rescue_MOMENTARY-SWITCH-SPST-SMD-5.2MM-SparkFun-Switches
+#
+DEF WiringDiagram-rescue_MOMENTARY-SWITCH-SPST-SMD-5.2MM-SparkFun-Switches S 0 40 N N 1 L N
 F0 "S" -200 100 45 H V L BNN
-F1 "SparkFun-Switches_MOMENTARY-SWITCH-SPST-SMD-5.2MM" -200 -100 45 H V L BNN
+F1 "WiringDiagram-rescue_MOMENTARY-SWITCH-SPST-SMD-5.2MM-SparkFun-Switches" -200 -100 45 H V L BNN
 F2 "TACTILE_SWITCH_SMD_5.2MM" 0 200 20 H I C CNN
 F3 "" 0 0 50 H I C CNN
 F4 "SWCH-08247" 0 250 60 H V C CNN
