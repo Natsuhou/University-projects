@@ -1,19 +1,34 @@
-#define R1_MOTOR 7//MOTOR 1 D2
-#define R2_MOTOR 6 //MOTOR 1 D4
-#define L1_MOTOR 8 //MOTOR 2 D5
-#define L2_MOTOR 9 //MOTOR 2 D6
-#define B_RIGHT 4 //Right bumper D4
-#define B_LEFT 2 //Left bumper D2
+#include <SoftwareSerial.h> //Use software serial for bluetooth
+#define R1_MOTOR 7 //MOTOR 1 D7
+#define R2_MOTOR 6 //MOTOR 1 D6
+#define L1_MOTOR 9 //MOTOR 2 D9
+#define L2_MOTOR 8 //MOTOR 2 D8
 #define PWM_L 5 //PWM for motor 1
 #define PWM_R 3 //PWM for motor 2
-#define PWM_SPEED 1606 //Speed
+#define PWM_SPEED 1606 //PWM speed
 
+/*
+ * How to: 
+ * Download "putty" from putty.org
+ * Choose connection type "serial"
+ * Change COM1 to COM5 and have baud rate set to 9600
+ * 
+ * Password for HC-05: 1234
+ * Controls:
+ * W = Forward
+ * A = Left 
+ * S = Backwards
+ * D = Right
+ * 
+ * Note: 
+ * Once a button is pressed the bot will infinitely loop that one command until another button is pressed.
+ * Essentially, the "delay" or degree of rotation is variable (set by the user rather than hard coded as an int)
+ * 
+ * ie: if you only press w it will infinitely loop the forward command until you press another command
+ */
 
-//Use enable pins on DNE
-
-//Variables used for left bumper right bumper
-int B_RIGHT2 = 0;
-int B_LEFT2 = 0;
+//Use a software serial to define RX/TX pins
+SoftwareSerial Blue(0, 1); //RX | TX
 
 void setup() {
   //Setting the pinmode for the right motors
@@ -22,122 +37,92 @@ void setup() {
   //Setting the pinmode for the left motors
   pinMode(L1_MOTOR,OUTPUT);
   pinMode(L2_MOTOR,OUTPUT);
-  /*       
-   * The pinmode for the right and the left bumper are set to INPUT_PULLUP
-   * so we don't get environmental interference with our bumper
-   */
-  pinMode(B_RIGHT,INPUT_PULLUP);
-  pinMode(B_LEFT,INPUT_PULLUP);
-
+  //Setting the speed for the PWM
   pinMode(PWM_R,OUTPUT);
   pinMode(PWM_L,OUTPUT);
-
+  //Setting the PWM speed for left and right motors
   digitalWrite(PWM_L,PWM_SPEED);
   digitalWrite(PWM_R,PWM_SPEED);
+  //Begin serials at 9600 baud rate
+  Blue.begin(9600);
   Serial.begin(9600);
 }
 
+//Bot will await next command from keyboard
 void loop() { 
-  /*
-   * B_LEFT2 & B_RIGHT2 are global variables declared above
-   * and they need to be set to the values taken in by the 
-   * analog pins "B_RIGHT" and "B_LEFT". We need B_RIGHT2 &
-   * B_LEFT2 to be integers so we can compare them in an if 
-   * statement.
-   */
-  B_LEFT2 = digitalRead(B_LEFT);
-  B_RIGHT2 = digitalRead(B_RIGHT);
-
-  /*
-   * We're comparing if B_RIGHT2 and B_LEFT2 are 0 to see if they 
-   * are both being pressed. If they're both being pressed, run 
-   * the bothBump(); function or if not, check to see if B_RIGHT2 is
-   * equal to zero and if B_LEFT is equal to zero.
-   */
-   //Assuming both bumpers are connected to ground
-  if (B_RIGHT2 == 0 && B_LEFT2 == 0) { 
-    //Method called from bothBump function
-    Serial.println("BOTH BUMPERS ARE BEING CALLED");
-    bothBump();
-  } else if (B_RIGHT2 == 0) {
-    //Method called from rightBump function
-    Serial.println("B_RIGHT2 is being called");
-    rightBump();
-  } else if (B_LEFT2 == 0) {
-    //Method called from leftBump function
-    Serial.println("B_LEFT2 is being called");
-    leftBump();
-  } else {
-    //If none of these are pressed, just move forward
+  //Take the input from putty as a char
+  char in = Blue.read();
+  //If the input is equal to 'w' on keyboard, go forward
+  if (in == 'w') {
     moveForward();
-    Serial.println("Nothing being pressed");
+    Serial.println("Move forward");
+    Blue.println("Move forward called");
+  //If the input is equal to 's' on keyboard, go backwards
+  } else if (in == 's') {
+    backUp();
+    Serial.println("Move back");
+    Blue.println("Move back");
+  //If the input is equal to 'a' on keyboard, go left
+  } else if (in == 'a') {
+    turnLeft();
+    Serial.println("Turn left");
+    Blue.println("Turn left");
+  //If the input is equal to 'd' on keyboard, go right
+  } else if (in == 'd') {
+    turnRight();
+    Serial.println("Turn right");
+    Blue.println("Turn right");
+  //If the input is equal to 'z' on keyboard, don't do anything
+  } else if (in == 'z') {
+    noMove();
+    Serial.println("Stop moving");
+    Blue.println("Stop moving");
   }
 }
-
 /*
- * NOTE
- * The tekbot's "turn" is determined by the delay value
- * you input into the function.
- * 
- * Next objective:
- * Find what "180 degrees" is in a turn in MS
+ * Turn left method
  */
-//Function Goal: Tekbok will back up, turn right and continue forward
-void leftBump() {
-  //Back up
-  backUp();
-  delay(1000);
+void turnLeft() {
   //Turn right
   digitalWrite(R1_MOTOR,HIGH);
   digitalWrite(R2_MOTOR,LOW);
   digitalWrite(L1_MOTOR,LOW);
   digitalWrite(L2_MOTOR,LOW);
-  delay(1060);
-
-  //Go forward
-  moveForward();
 }
-//Function Goal: Tekbot will backup, turn left and continue forward
-void rightBump() {
-  //Back up
-  backUp();
-  delay(1000);
+/*
+ * Turn right method
+ */
+void turnRight() {
   //Turn left
   digitalWrite(R1_MOTOR,LOW);
   digitalWrite(R2_MOTOR,LOW);
   digitalWrite(L1_MOTOR,HIGH);
   digitalWrite(L2_MOTOR,LOW);
-  delay(1100);
-
-  //Go forward
-  moveForward();
 }
- //Function Goal: Tekbot will backup, turn 180 and continue forward
-void bothBump() {
-  //Backup
-  backUp();
-  delay(1000);
-  //Turn 180
-  digitalWrite(R1_MOTOR,HIGH);
-  digitalWrite(R2_MOTOR,LOW);
-  digitalWrite(L1_MOTOR,LOW);
-  digitalWrite(L2_MOTOR,LOW);
-  //1900 good 90
-  delay(1930);
-  //Move forward
-  moveForward();
-}
-//Backup function used in other functions above
+/*
+ * Back up method
+ */
 void backUp() {
   digitalWrite(R1_MOTOR,LOW);
   digitalWrite(R2_MOTOR,HIGH);
   digitalWrite(L1_MOTOR,LOW);
   digitalWrite(L2_MOTOR,HIGH);
 }
-//moveForward function used in other functions above
+/*
+ * Move forward method
+ */
 void moveForward() {
   digitalWrite(R1_MOTOR,HIGH);
   digitalWrite(R2_MOTOR,LOW);
   digitalWrite(L1_MOTOR,HIGH);
+  digitalWrite(L2_MOTOR,LOW);
+}
+/*
+ * Do nothing method
+ */
+void noMove() {
+  digitalWrite(R1_MOTOR,LOW);
+  digitalWrite(R2_MOTOR,LOW);
+  digitalWrite(L1_MOTOR,LOW);
   digitalWrite(L2_MOTOR,LOW);
 }
