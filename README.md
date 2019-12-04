@@ -8,7 +8,7 @@ Basic bump bot that does stuff when the bumpers are hit.
 - HC-05 for bluetooth communication
 - Arduino nano as microcontroller
 - L239DNE as motor controller
-![wiring diagram](https://github.com/Shogatsu/ECE-Stuff/blob/master/WiringDiaagram/finalDiagram.PNG)
+![wiring diagram](https://github.com/Shogatsu/ECE-Stuff/blob/master/WiringDiagram/finalDiaagram.PNG)
 
 ### Code
 Main part of the code
