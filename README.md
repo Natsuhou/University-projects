@@ -1,4 +1,4 @@
-# ECE Stuff
+# University projects
 Documentation for ECE stuff
 
 ## [ECE 111] Tekbot
